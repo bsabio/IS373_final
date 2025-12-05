@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ description or site.description }}" />
+    <link rel="stylesheet" href="{{ site.baseUrl }}/assets/css/global.css" />
+
+    <!-- Basic Open Graph -->
+    <meta property="og:title" content="{{ title or site.title }}" />
+    <meta property="og:description" content="{{ description or site.description }}" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ site.baseUrl }}/">Home</a> |
+        <a href="{{ site.baseUrl }}/gallery/">Gallery</a>
+      </nav>
+    </header>
+
+    <main>
+      {{ content | safe }}
+    </main>
+
+    <footer>
+      <p>&copy; {{ site.title }}</p>
+    </footer>
+  </body>
+</html>

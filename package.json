@@ -1,0 +1,14 @@
+{
+  "name": "mywebclass-org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "build:prod": "ELEVENTY_ENV=production eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0",
+    "html-minifier-terser": "^7.0.0"
+  }
+}
