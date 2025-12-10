@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAUHAUS — Form Follows Function</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Futura', 'Century Gothic', 'Arial', sans-serif;
+      background: #F5F5F0;
+      color: #000;
+      overflow-x: hidden;
+    }
+    
+    /* Header Section */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: #E1000F;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: 10%;
+      width: 300px;
+      height: 300px;
+      background: #FFD500;
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    h1 {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 0.9;
+      margin-bottom: 1rem;
+    }
+    
+    .subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #FFD500;
+    }
+    
+    /* Main Grid */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .geometric-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    
+    .shape-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-height: 250px;
+      border: 4px solid #000;
+    }
+    
+    .box-1 { grid-column: span 4; background: #E1000F; color: #fff; }
+    .box-2 { grid-column: span 3; background: #0057B8; color: #fff; }
+    .box-3 { grid-column: span 5; background: #FFD500; color: #000; }
+    .box-4 { grid-column: span 6; background: #fff; color: #000; position: relative; }
+    .box-5 { grid-column: span 3; background: #000; color: #fff; }
+    .box-6 { grid-column: span 3; background: #E1000F; color: #fff; }
+    .box-7 { grid-column: span 4; background: #0057B8; color: #fff; }
+    .box-8 { grid-column: span 5; background: #FFD500; color: #000; }
+    .box-9 { grid-column: span 3; background: #000; color: #fff; }
+    
+    /* Geometric shapes overlay */
+    .circle {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #E1000F;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid #000;
+    }
+    
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 75px solid transparent;
+      border-right: 75px solid transparent;
+      border-bottom: 130px solid #0057B8;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* Manifesto Section */
+    .manifesto {
+      background: #fff;
+      padding: 4rem 3rem;
+      border: 8px solid #000;
+      margin: 4rem 0;
+      position: relative;
+    }
+    
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 80px;
+      height: 80px;
+      background: #FFD500;
+      z-index: -1;
+    }
+    
+    .manifesto h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .manifesto p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      max-width: 70ch;
+    }
+    
+    /* Principles Grid */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin: 4rem 0;
+    }
+    
+    .principle {
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border: 4px solid #000;
+      position: relative;
+    }
+    
+    .principle::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      width: 40px;
+      height: 40px;
+      z-index: -1;
+    }
+    
+    .principle:nth-child(1)::before { background: #E1000F; }
+    .principle:nth-child(2)::before { background: #0057B8; }
+    .principle:nth-child(3)::before { background: #FFD500; }
+    
+    .principle h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .principle p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+    
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 6rem;
+    }
+    
+    footer p {
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    
+    .year {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #FFD500;
+      display: block;
+      margin-top: 1rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .geometric-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .shape-box {
+        grid-column: span 1 !important;
+        min-height: 200px;
+      }
+      
+      header::before,
+      header::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>BAUHAUS</h1>
+      <p class="subtitle">Form Follows Function</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="geometric-grid">
+      <div class="shape-box box-1">RED</div>
+      <div class="shape-box box-2">BLUE</div>
+      <div class="shape-box box-3">YELLOW</div>
+      <div class="shape-box box-4">
+        <div class="circle"></div>
+      </div>
+      <div class="shape-box box-5">BLACK</div>
+      <div class="shape-box box-6">FORM</div>
+      <div class="shape-box box-7">
+        <div class="triangle"></div>
+      </div>
+      <div class="shape-box box-8">FUNCTION</div>
+      <div class="shape-box box-9">GRID</div>
+    </div>
+
+    <section class="manifesto">
+      <h2>The New Architecture</h2>
+      <p>
+        The Bauhaus strives to bring together all creative effort into one whole, 
+        to reunify all the disciplines of practical art—sculpture, painting, 
+        handicrafts, and crafts—as inseparable components of a new architecture.
+      </p>
+      <p>
+        The ultimate aim of all creative activity is a building! The decoration 
+        of buildings was once the noblest function of fine arts, and fine arts 
+        were indispensable to great architecture.
+      </p>
+      <p>
+        Today they exist in complacent isolation, and can only be rescued by the 
+        conscious co-operative effort of all craftsmen.
+      </p>
+    </section>
+
+    <div class="principles">
+      <article class="principle">
+        <h3>Unity</h3>
+        <p>
+          Art and technology unite. The artist and craftsman work together 
+          to create functional beauty through rational design.
+        </p>
+      </article>
+
+      <article class="principle">
+        <h3>Simplicity</h3>
+        <p>
+          Reduce to essentials. Every element serves a purpose. 
+          Ornament is crime when it does not serve function.
+        </p>
+      </article>
+
+      <article class="principle">
+        <h3>Geometry</h3>
+        <p>
+          Pure forms—circle, square, triangle. Primary colors—red, blue, yellow. 
+          The language of universal design.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <footer>
+    <p>Staatliches Bauhaus</p>
+    <span class="year">1919–1933</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+---
+title: Submit Your Work
+layout: base.njk
+permalink: "/submission/index.html"
+---
+
+<h1>Submit a Design</h1>
+
+<form id="submissionForm" novalidate>
+  <div>
+    <label for="name">Name *</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+
+  <div>
+    <label for="email">Email *</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+
+  <div>
+    <label for="style">Design Style *</label>
+    <select id="style" name="style" required>
+      <option value="">Loading styles…</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="url">URL *</label>
+    <input id="url" name="url" type="url" required />
+  </div>
+
+  <div>
+    <label for="screenshot">Screenshot (image) *</label>
+    <input id="screenshot" name="screenshot" type="file" accept="image/*" required />
+  </div>
+
+  <div>
+    <label for="description">Description *</label>
+    <textarea id="description" name="description" rows="5" required></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+
+  <div id="formMessage" role="status" aria-live="polite"></div>
+</form>
+
+<script>
+// API_ROOT can be set globally (e.g. window.API_ROOT) if API server runs on a different port.
+const API_ROOT = (typeof window.API_ROOT !== 'undefined') ? window.API_ROOT : ''
+
+const form = document.getElementById('submissionForm')
+const messageEl = document.getElementById('formMessage')
+const styleSelect = document.getElementById('style')
+
+async function loadStyles(){
+  try{
+    const r = await fetch(API_ROOT + '/api/styles')
+    if(!r.ok) throw new Error('Failed to load styles')
+    const data = await r.json()
+    styleSelect.innerHTML = '<option value="">Select a style</option>'
+    data.styles.forEach(s => {
+      const opt = document.createElement('option')
+      opt.value = s._id
+      opt.textContent = s.title
+      styleSelect.appendChild(opt)
+    })
+  }catch(err){
+    styleSelect.innerHTML = '<option value="">Unable to load styles</option>'
+    console.error(err)
+  }
+}
+
+function showMessage(text, isError=false){
+  messageEl.textContent = text
+  messageEl.style.color = isError ? 'crimson' : 'green'
+}
+
+function validateEmail(email){
+  // simple RFC-ish check
+  return /\S+@\S+\.\S+/.test(email)
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  showMessage('Submitting...')
+
+  const name = form.name.value.trim()
+  const email = form.email.value.trim()
+  const style = form.style.value
+  const url = form.url.value.trim()
+  const description = form.description.value.trim()
+  const file = form.screenshot.files[0]
+
+  // Client-side validation
+  if(!name || !email || !style || !url || !description || !file){
+    return showMessage('Please fill all required fields.', true)
+  }
+  if(!validateEmail(email)) return showMessage('Please enter a valid email.', true)
+
+  try{
+    // convert file to data URL (base64)
+    const dataUrl = await new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+
+    const payload = { name, email, style, url, description, screenshot: dataUrl }
+
+    const resp = await fetch(API_ROOT + '/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    const result = await resp.json()
+    if(!resp.ok || result.error){
+      throw new Error(result.error || 'Submission failed')
+    }
+
+    showMessage('Submission received — thank you!')
+    form.reset()
+  }catch(err){
+    console.error(err)
+    showMessage('Error: ' + (err.message || 'Submission failed'), true)
+  }
+})
+
+// Load styles on page load
+loadStyles()
+</script>

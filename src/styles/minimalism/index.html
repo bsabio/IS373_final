@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalism — Less is More</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', sans-serif;
+      background: #FFFFFF;
+      color: #1A1A1A;
+      line-height: 1.8;
+      font-weight: 300;
+      padding: 0;
+    }
+    
+    /* Header */
+    header {
+      padding: 8rem 2rem 12rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      color: #000;
+    }
+    
+    .tagline {
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      color: #666;
+      max-width: 30ch;
+      line-height: 1.6;
+    }
+    
+    /* Divider */
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: #000;
+      margin: 8rem auto;
+    }
+    
+    /* Main Content */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2rem 8rem;
+    }
+    
+    section {
+      margin-bottom: 12rem;
+    }
+    
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      color: #000;
+      letter-spacing: -0.01em;
+    }
+    
+    p {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      margin-bottom: 2rem;
+      color: #4A4A4A;
+      max-width: 55ch;
+    }
+    
+    /* Quote Section */
+    .quote-section {
+      padding: 8rem 2rem;
+      background: #FAFAFA;
+      margin: 8rem 0;
+    }
+    
+    blockquote {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: #000;
+      font-style: normal;
+      text-align: center;
+    }
+    
+    cite {
+      display: block;
+      margin-top: 3rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #666;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    
+    /* Principles */
+    .principles {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6rem;
+      margin-top: 8rem;
+    }
+    
+    .principle {
+      padding-left: 2rem;
+      border-left: 1px solid #E0E0E0;
+      transition: border-color 0.3s;
+    }
+    
+    .principle:hover {
+      border-left-color: #000;
+    }
+    
+    .principle h3 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: #000;
+      letter-spacing: 0.02em;
+    }
+    
+    .principle p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.8;
+    }
+    
+    /* Accent Element */
+    .accent-box {
+      width: 60px;
+      height: 60px;
+      background: #000;
+      margin: 8rem auto;
+      transition: transform 0.3s;
+    }
+    
+    .accent-box:hover {
+      transform: rotate(45deg);
+    }
+    
+    /* Footer */
+    footer {
+      padding: 6rem 2rem;
+      text-align: center;
+      border-top: 1px solid #E0E0E0;
+      margin-top: 8rem;
+    }
+    
+    footer p {
+      font-size: 0.875rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    /* Whitespace sections */
+    .spacer {
+      height: 12rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 4rem 2rem 6rem;
+      }
+      
+      .divider {
+        margin: 4rem auto;
+      }
+      
+      section {
+        margin-bottom: 6rem;
+      }
+      
+      .quote-section {
+        padding: 4rem 2rem;
+        margin: 4rem 0;
+      }
+      
+      .principles {
+        gap: 4rem;
+        margin-top: 4rem;
+      }
+      
+      .spacer {
+        height: 6rem;
+      }
+      
+      .accent-box {
+        margin: 4rem auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Minimalism</h1>
+    <p class="tagline">The art of intentional simplicity, where every element earns its place.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <main>
+    <section>
+      <h2>Philosophy</h2>
+      <p>
+        Minimalism is not about having less. It's about making room for more of what matters.
+      </p>
+      <p>
+        Every line, every space, every element exists with purpose. 
+        Nothing is added without intention. Nothing remains without reason.
+      </p>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section>
+      <h2>Clarity</h2>
+      <p>
+        When complexity is removed, truth emerges. Clean typography guides the eye. 
+        Generous whitespace creates breathing room.
+      </p>
+      <p>
+        The message becomes clear when the noise is removed.
+      </p>
+    </section>
+  </main>
+
+  <div class="quote-section">
+    <blockquote>
+      "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+      <cite>Antoine de Saint-Exupéry</cite>
+    </blockquote>
+  </div>
+
+  <main>
+    <div class="principles">
+      <article class="principle">
+        <h3>Essentialism</h3>
+        <p>
+          Strip away the unnecessary. What remains is what truly matters. 
+          Each element serves a clear purpose in the design.
+        </p>
+      </article>
+
+      <article class="principle">
+        <h3>Whitespace</h3>
+        <p>
+          Empty space is not wasted space. It provides rest, creates hierarchy, 
+          and allows the essential elements to breathe and resonate.
+        </p>
+      </article>
+
+      <article class="principle">
+        <h3>Restraint</h3>
+        <p>
+          Limited palette. Controlled typography. Intentional layout. 
+          Every choice is deliberate, nothing is arbitrary.
+        </p>
+      </article>
+    </div>
+
+    <div class="accent-box"></div>
+  </main>
+
+  <footer>
+    <p>Less is More</p>
+  </footer>
+</body>
+</html>
