@@ -2,27 +2,125 @@
 title: Review Submissions
 layout: base.njk
 permalink: "/review/index.html"
+description: Review and moderate community design submissions
 ---
 
-<h1>Review Submissions</h1>
+<style>
+.review-hero {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.review-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.review-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+.submission {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.submission::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  opacity: 0;
+  transform: translate(50px, -50px) rotate(45deg);
+  transition: all 0.4s ease;
+}
+.submission:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  border-color: #667eea;
+}
+.submission:hover::before {
+  opacity: 0.08;
+  transform: translate(0, 0) rotate(45deg);
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.actions button {
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+.approve {
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  color: #1a202c;
+}
+.approve:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(132, 250, 176, 0.4);
+}
+.reject {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+.reject:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(245, 87, 108, 0.4);
+}
+</style>
 
-<div id="list">
-  <p>Loading submissions…</p>
+<div class="review-hero">
+  <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: bold; opacity: 0.9; margin-bottom: 1rem;">
+    04 — Moderation
+  </p>
+  <h1>Review Submissions</h1>
+  <p style="font-size: 1.125rem; max-width: 600px; margin: 0 auto; opacity: 0.95;">
+    Review pending design submissions and approve them for the gallery
+  </p>
+</div>
+
+<div class="review-container">
+  <div id="list">
+    <p style="text-align: center; color: #667eea; font-weight: 600;">Loading submissions…</p>
+  </div>
 </div>
 
 <template id="itemTpl">
-  <article class="submission" data-id="">
-    <h2 class="name"></h2>
-    <p><strong>Email:</strong> <a class="email" href="mailto:"></a></p>
-    <p><strong>Style:</strong> <span class="style"></span></p>
-    <p><strong>Description:</strong> <span class="description"></span></p>
-    <p><a class="url" target="_blank" rel="noopener">Visit student URL</a></p>
-    <div class="screenshotWrap"><img class="screenshot" alt="Submission screenshot"/></div>
-    <div class="actions">
-      <button class="approve">Approve</button>
-      <button class="reject">Reject</button>
+  <article class="submission" data-id="" style="position: relative; z-index: 1;">
+    <h2 class="name" style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;"></h2>
+    <div style="display: grid; gap: 0.75rem; margin-bottom: 1rem;">
+      <p style="color: #4a5568;"><strong style="color: #667eea; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Email:</strong> <a class="email" href="mailto:" style="color: #667eea; text-decoration: none;"></a></p>
+      <p style="color: #4a5568;"><strong style="color: #667eea; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Style:</strong> <span class="style"></span></p>
+      <p style="color: #4a5568;"><strong style="color: #667eea; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Description:</strong> <span class="description"></span></p>
+      <p><a class="url" target="_blank" rel="noopener" style="color: #667eea; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">Visit URL →</a></p>
     </div>
-    <hr/>
+    <div class="screenshotWrap" style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 2px solid #e2e8f0;">
+      <img class="screenshot" alt="Submission screenshot" style="width: 100%; height: auto; display: block;"/>
+    </div>
+    <div class="actions">
+      <button class="approve">✓ Approve</button>
+      <button class="reject">✕ Reject</button>
+    </div>
   </article>
 </template>
 
