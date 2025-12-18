@@ -47,3 +47,4 @@ Eleventy config
 - Output directory: `_site`
 - Passthrough copy for `src/assets` → `_site/assets`
 - HTML is minified when `ELEVENTY_ENV=production`
+# Trigger rebuild
