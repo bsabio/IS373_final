@@ -4,13 +4,17 @@ module.exports = function (eleventyConfig) {
   // Passthrough copy for assets folder
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
+  // Path prefix for GitHub Pages
+  const pathPrefix = process.env.ELEVENTY_ENV === 'production' ? '/IS373_final' : '';
+  eleventyConfig.setPathPrefix(pathPrefix);
+
   // Global site data (used in templates)
   if (eleventyConfig.addGlobalData) {
     eleventyConfig.addGlobalData("site", {
       title: "MyWebClass.org",
       description: "A learning site for Web Class about design principles and movements",
-      url: process.env.SITE_URL || "https://mywebclass.org",
-      baseUrl: process.env.BASEURL || "."
+      url: process.env.SITE_URL || "https://bsabio.github.io",
+      baseUrl: pathPrefix
     });
   }
 

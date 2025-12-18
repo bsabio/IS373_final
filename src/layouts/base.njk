@@ -14,8 +14,8 @@
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
     
     <!-- Preload critical CSS -->
-    <link rel="preload" href="{{ site.baseUrl }}/assets/css/global.css" as="style" />
-    <link rel="stylesheet" href="{{ site.baseUrl }}/assets/css/global.css" />
+    <link rel="preload" href="{{ '/assets/css/global.css' | url }}" as="style" />
+    <link rel="stylesheet" href="{{ '/assets/css/global.css' | url }}" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}" />
@@ -35,9 +35,9 @@
     
     <header role="banner">
       <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
+        <a href="{{ '/' | url }}">Home</a>
         <span aria-hidden="true">|</span>
-        <a href="/gallery/">Gallery</a>
+        <a href="{{ '/gallery/' | url }}">Gallery</a>
       </nav>
     </header>
 
@@ -46,7 +46,7 @@
     </main>
 
     <footer role="contentinfo">
-      <p>&copy; <span id="current-year"></span> {{ site.title }} | <a href="/pages/privacy/">Privacy Policy</a> | <a href="#" onclick="window.openCookiePreferences(); return false;">Cookie Preferences</a></p>
+      <p>&copy; <span id="current-year"></span> {{ site.title }} | <a href="{{ '/pages/privacy/' | url }}">Privacy Policy</a> | <a href="#" onclick="window.openCookiePreferences(); return false;">Cookie Preferences</a></p>
       
       <!-- Schema.org Organization Structured Data -->
       <script type="application/ld+json">
