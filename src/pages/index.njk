@@ -6,170 +6,94 @@ description: Explore design movements and submit your creative work to our commu
 ---
 
 {# Hero Section with Dynamic Typography #}
-<section class="hero-section" style="padding: 4rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; position: relative; overflow: hidden;">
-  <div class="hero-bg-pattern" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1; background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);"></div>
+<section class="hero-section">
+  <div class="hero-bg-pattern"></div>
   
   <div class="hero-content" style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
-    <div style="border-left: 4px solid rgba(255,255,255,0.8); padding-left: 1.5rem; margin-bottom: 2rem;">
-      <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; font-weight: bold; opacity: 0.9; margin: 0;">
+    <div style="border-left: 4px solid rgba(245, 245, 245, 0.8); padding-left: 1.5rem; margin-bottom: 2rem;">
+      <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; font-weight: bold; opacity: 0.9; margin: 0; color: #e8e8e8;">
         Web Design Showcase 2025
       </p>
     </div>
     
-    <h1 style="font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; line-height: 1; letter-spacing: -0.03em; margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-      {{ site.title }}
-    </h1>
+    <h1>{{ site.title }}</h1>
     
-    <div style="border-top: 3px solid white; margin: 2rem 0;"></div>
+    <div style="border-top: 3px solid #00d9ff; margin: 2rem 0;"></div>
     
-    <p style="font-size: 1.5rem; max-width: 700px; line-height: 1.6; opacity: 0.95; margin-bottom: 3rem;">
+    <p style="font-size: 1.5rem; max-width: 700px; line-height: 1.6; opacity: 0.95; margin-bottom: 3rem; color: #e8e8e8;">
       {{ site.description }}
     </p>
     
-    <div class="cta-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="{{ '/gallery/' | url }}" class="btn-primary" style="display: inline-block; padding: 1rem 2rem; background-color: white; color: #667eea; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 4px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        View Gallery
-      </a>
-      <a href="{{ '/submission/' | url }}" class="btn-secondary" style="display: inline-block; padding: 1rem 2rem; background-color: transparent; color: white; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border: 2px solid white; border-radius: 4px; transition: transform 0.3s ease, background-color 0.3s ease;">
-        Submit Work
-      </a>
+    <div class="cta-buttons">
+      <a href="{{ '/gallery/' | url }}" class="btn-primary">View Gallery</a>
+      <a href="{{ '/submission/' | url }}" class="btn-secondary">Submit Work</a>
     </div>
   </div>
 </section>
 
 {# Design Movements Section #}
-<section class="design-movements" style="padding: 5rem 2rem; background-color: #f8f9fa;">
+<section class="design-movements">
   <div style="max-width: 1200px; margin: 0 auto;">
     <div style="margin-bottom: 3rem;">
-      <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: bold; color: #667eea; margin-bottom: 1rem;">
+      <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: bold; color: #00d9ff; margin-bottom: 1rem;">
         01 — Explore Styles
       </p>
-      <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; color: #1a202c; margin-bottom: 1rem;">
+      <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; color: #f5f5f5; margin-bottom: 1rem;">
         Design Movements
       </h2>
-      <div style="width: 60px; height: 3px; background-color: #667eea; margin-bottom: 1.5rem;"></div>
-      <p style="font-size: 1.125rem; color: #4a5568; max-width: 700px; line-height: 1.7;">
+      <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #00d9ff, #ff006e); margin-bottom: 1.5rem;"></div>
+      <p style="font-size: 1.125rem; color: #e8e8e8; max-width: 700px; line-height: 1.7;">
         Discover the iconic design styles that shaped visual culture and continue to influence modern aesthetics.
       </p>
     </div>
     
-    <div class="movements-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem;">
+    <div class="card-grid">
       {# Bauhaus Card #}
-      <article class="movement-card" style="background: white; border: 2px solid #e2e8f0; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
-        <div class="card-accent" style="position: absolute; top: 0; right: 0; width: 80px; height: 80px; background-color: #667eea; opacity: 0.1; transform: translate(40px, -40px) rotate(45deg); transition: all 0.4s ease;"></div>
-        
-        <div style="position: relative; z-index: 1;">
-          <span style="font-size: 3rem; font-weight: 900; color: #e2e8f0; line-height: 1; display: block; margin-bottom: 1rem;">01</span>
-          <h3 style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #1a202c; margin-bottom: 1rem;">
-            Bauhaus
-          </h3>
-          <div style="width: 40px; height: 2px; background-color: #667eea; margin-bottom: 1rem;"></div>
-          <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem;">
-            Form follows function. Clean geometric shapes, primary colors, and rational design that revolutionized modern aesthetics.
-          </p>
-          <a href="{{ '/styles/bauhaus/' | url }}" style="color: #667eea; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.1em; transition: transform 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
-            Explore Style →
-          </a>
-        </div>
+      <article class="card movement-card">
+        <span class="card-number" style="font-size: 3rem; font-weight: 900; color: rgba(0,217,255,0.1); line-height: 1; display: block; margin-bottom: 1rem;">01</span>
+        <h3>Bauhaus</h3>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #00d9ff, #ff006e); margin-bottom: 1rem;"></div>
+        <p>Form follows function. Clean geometric shapes, primary colors, and rational design that revolutionized modern aesthetics.</p>
+        <a href="{{ '/styles/bauhaus/' | url }}" class="explore-link">Explore Style →</a>
       </article>
       
       {# Minimalism Card #}
-      <article class="movement-card" style="background: white; border: 2px solid #e2e8f0; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
-        <div class="card-accent" style="position: absolute; top: 0; right: 0; width: 80px; height: 80px; background-color: #764ba2; opacity: 0.1; transform: translate(40px, -40px) rotate(45deg); transition: all 0.4s ease;"></div>
-        
-        <div style="position: relative; z-index: 1;">
-          <span style="font-size: 3rem; font-weight: 900; color: #e2e8f0; line-height: 1; display: block; margin-bottom: 1rem;">02</span>
-          <h3 style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #1a202c; margin-bottom: 1rem;">
-            Minimalism
-          </h3>
-          <div style="width: 40px; height: 2px; background-color: #764ba2; margin-bottom: 1rem;"></div>
-          <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem;">
-            Less is more. Essential elements, negative space, and refined simplicity create powerful visual statements.
-          </p>
-          <a href="{{ '/styles/minimalism/' | url }}" style="color: #764ba2; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.1em; transition: transform 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
-            Explore Style →
-          </a>
-        </div>
+      <article class="card movement-card">
+        <span class="card-number" style="font-size: 3rem; font-weight: 900; color: rgba(0,217,255,0.1); line-height: 1; display: block; margin-bottom: 1rem;">02</span>
+        <h3>Minimalism</h3>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #00d9ff, #ff006e); margin-bottom: 1rem;"></div>
+        <p>Less is more. Essential elements, negative space, and refined simplicity create powerful visual statements.</p>
+        <a href="{{ '/styles/minimalism/' | url }}" class="explore-link">Explore Style →</a>
       </article>
       
       {# Neo-Futurism Card #}
-      <article class="movement-card" style="background: white; border: 2px solid #e2e8f0; padding: 2rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
-        <div class="card-accent" style="position: absolute; top: 0; right: 0; width: 80px; height: 80px; background-color: #f093fb; opacity: 0.1; transform: translate(40px, -40px) rotate(45deg); transition: all 0.4s ease;"></div>
-        
-        <div style="position: relative; z-index: 1;">
-          <span style="font-size: 3rem; font-weight: 900; color: #e2e8f0; line-height: 1; display: block; margin-bottom: 1rem;">03</span>
-          <h3 style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #1a202c; margin-bottom: 1rem;">
-            Neo-Futurism
-          </h3>
-          <div style="width: 40px; height: 2px; background-color: #f093fb; margin-bottom: 1rem;"></div>
-          <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem;">
-            Tomorrow's aesthetic today. Dynamic curves, bold innovation, and visionary design pushing boundaries forward.
-          </p>
-          <a href="{{ '/styles/neo-futurism/' | url }}" style="color: #f093fb; font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.1em; transition: transform 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
-            Explore Style →
-          </a>
-        </div>
+      <article class="card movement-card">
+        <span class="card-number" style="font-size: 3rem; font-weight: 900; color: rgba(0,217,255,0.1); line-height: 1; display: block; margin-bottom: 1rem;">03</span>
+        <h3>Neo-Futurism</h3>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #00d9ff, #ff006e); margin-bottom: 1rem;"></div>
+        <p>Tomorrow's aesthetic today. Dynamic curves, bold innovation, and visionary design pushing boundaries forward.</p>
+        <a href="{{ '/styles/neo-futurism/' | url }}" class="explore-link">Explore Style →</a>
       </article>
     </div>
   </div>
 </section>
 
 {# Community Section #}
-<section class="community-section" style="padding: 5rem 2rem; background-color: #1a202c; color: white;">
+<section class="community-section">
   <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-    <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: bold; color: #667eea; margin-bottom: 1rem;">
+    <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: bold; color: #00d9ff; margin-bottom: 1rem;">
       02 — Join Us
     </p>
-    <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 2rem;">
+    <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 2rem; color: #f5f5f5;">
       Share Your Vision
     </h2>
-    <div style="width: 60px; height: 3px; background-color: #667eea; margin: 0 auto 2rem;"></div>
-    <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem; line-height: 1.7; opacity: 0.9;">
+    <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #00d9ff, #ff006e); margin: 0 auto 2rem;"></div>
+    <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem; line-height: 1.7; opacity: 0.9; color: #e8e8e8;">
       Submit your designs, explore community submissions, and be part of a growing showcase of creative excellence.
     </p>
     <div class="community-cta" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="{{ '/gallery/' | url }}" class="btn-outline" style="display: inline-block; padding: 1rem 2rem; border: 2px solid white; color: white; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 4px; transition: all 0.3s ease;">
-        Browse Gallery
-      </a>
-      <a href="{{ '/submission/' | url }}" class="btn-primary-inverse" style="display: inline-block; padding: 1rem 2rem; background-color: #667eea; color: white; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 4px; transition: all 0.3s ease;">
-        Submit Your Work
-      </a>
+      <a href="{{ '/gallery/' | url }}" class="btn-secondary">Browse Gallery</a>
+      <a href="{{ '/submission/' | url }}" class="btn-primary">Submit Your Work</a>
     </div>
   </div>
 </section>
-
-<style>
-  /* Hover effects for cards */
-  .movement-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    border-color: #667eea;
-  }
-  
-  .movement-card:hover .card-accent {
-    transform: translate(0, 0) rotate(45deg);
-    opacity: 0.15;
-  }
-  
-  /* Button hover effects */
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102,126,234,0.4);
-  }
-  
-  .btn-secondary:hover {
-    background-color: rgba(255,255,255,0.1);
-    transform: translateY(-2px);
-  }
-  
-  .btn-outline:hover {
-    background-color: white;
-    color: #1a202c;
-  }
-  
-  .btn-primary-inverse:hover {
-    background-color: #764ba2;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(118,75,162,0.4);
-  }
-</style>

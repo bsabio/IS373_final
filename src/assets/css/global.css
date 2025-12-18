@@ -1,6 +1,825 @@
-/* global.css - main global stylesheet (placeholder)
-   Do NOT add design styles here yet. Styles for Bauhaus, Minimalism,
-   and Neo-Futurism will live in `src/styles/` when implemented.
-*/
+/* ============================================================================
+   GLOBAL.CSS - Bold Digital Museum UI System
+   ============================================================================
+   
+   This stylesheet defines the cohesive visual system for the main MyWebClass 
+   site interface. It creates a bold, dark, exhibition-like aesthetic while 
+   preserving the autonomy of individual design demo pages.
+   
+   SCOPE: Main site UI (header, navigation, gallery, pages, footer)
+   NOT SCOPED: Design style demo pages (Bauhaus, Minimalism, Neo-Futurism)
+   
+   Key Features:
+   - Dark, high-contrast palette for modern museum feel
+   - CSS variables for consistent theming and maintenance
+   - Responsive grid layouts for content cards
+   - Subtle hover states and glow accents
+   - Accessibility-first approach (WCAG AA compliant)
+   - Pure CSS, no external frameworks
+   
+   ============================================================================ */
 
-/* Add global rules later */
+/* ============================================================================
+   CSS VARIABLES - Design Tokens
+   ============================================================================ */
+
+:root {
+  /* Color Palette - Museum Aesthetic */
+  --museum-black: #0a0a0a;
+  --museum-dark-bg: #111111;
+  --museum-dark-secondary: #1a1a1a;
+  --museum-grey-dark: #2a2a2a;
+  --museum-grey: #4a4a4a;
+  --museum-grey-light: #6a6a6a;
+  --museum-white: #f5f5f5;
+  --museum-off-white: #e8e8e8;
+  
+  /* Accent Colors - Bold & Confident */
+  --accent-primary: #00d9ff;    /* Cyan - digital, cutting-edge */
+  --accent-secondary: #ff006e;  /* Magenta - bold, contemporary */
+  --accent-tertiary: #7700ff;   /* Purple - creative, innovative */
+  
+  /* Functional Colors */
+  --success: #00c9a7;
+  --warning: #ffc400;
+  --error: #ff006e;
+  
+  /* Typography */
+  --font-family-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-family-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shadows - Subtle Depth */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.6);
+  
+  /* Glows - Accent Highlights */
+  --glow-cyan: 0 0 12px rgba(0, 217, 255, 0.3), 0 0 24px rgba(0, 217, 255, 0.15);
+  --glow-magenta: 0 0 12px rgba(255, 0, 110, 0.3), 0 0 24px rgba(255, 0, 110, 0.15);
+}
+
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--museum-black);
+  color: var(--museum-white);
+  font-family: var(--font-family-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip to Main Content Link - Accessibility */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent-primary);
+  color: var(--museum-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-base), text-decoration var(--transition-base);
+}
+
+a:hover,
+a:focus {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   HEADER & NAVIGATION
+   ============================================================================ */
+
+header {
+  background-color: var(--museum-dark-bg);
+  border-bottom: 2px solid var(--museum-grey-dark);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+header nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.nav-brand span {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent-primary);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color var(--transition-base), text-shadow var(--transition-base);
+}
+
+.nav-brand span:hover {
+  color: var(--accent-secondary);
+  text-shadow: var(--glow-magenta);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-links a {
+  color: var(--museum-white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
+  position: relative;
+  display: inline-block;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width var(--transition-base);
+}
+
+.nav-links a:hover {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Review Button - Call to Action */
+.nav-links a[href*="review"] {
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  font-weight: 700;
+}
+
+.nav-links a[href*="review"]:hover {
+  background-color: var(--accent-primary);
+  color: var(--museum-black);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-md);
+  }
+
+  .nav-links {
+    gap: var(--space-md);
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
+/* ============================================================================
+   MAIN CONTENT
+   ============================================================================ */
+
+main {
+  min-height: calc(100vh - 200px);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-3xl);
+}
+
+/* ============================================================================
+   SECTIONS & LAYOUT
+   ============================================================================ */
+
+section {
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Hero Section Override - Museum Dark */
+.hero-section {
+  background: linear-gradient(135deg, var(--museum-dark-secondary) 0%, var(--museum-grey-dark) 100%) !important;
+  color: var(--museum-white) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 217, 255, 0.05) 35px, rgba(0, 217, 255, 0.05) 70px);
+  pointer-events: none;
+}
+
+.hero-section h1 {
+  color: var(--accent-primary) !important;
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.3) !important;
+}
+
+.hero-section p {
+  color: var(--museum-off-white) !important;
+}
+
+/* Gallery Hero */
+.gallery-hero {
+  background: linear-gradient(135deg, var(--museum-dark-secondary) 0%, var(--museum-grey-dark) 100%);
+  color: var(--museum-white);
+  padding: var(--space-3xl) var(--space-lg);
+  border-bottom: 2px solid var(--accent-primary);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.gallery-hero h1 {
+  color: var(--accent-primary);
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Section Headings with Accent Underline */
+.section-heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--museum-white);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  padding-bottom: var(--space-md);
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-sm);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ============================================================================
+   CARDS & GRID LAYOUTS
+   ============================================================================ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-xl);
+  margin: var(--space-xl) 0;
+}
+
+.card {
+  background: var(--museum-dark-secondary);
+  border: 2px solid var(--museum-grey-dark);
+  padding: var(--space-xl);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 100% 0%, var(--accent-primary), transparent 50%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.card:hover {
+  background: var(--museum-grey-dark);
+  border-color: var(--accent-primary);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 217, 255, 0.2), var(--shadow-lg);
+}
+
+.card:hover::before {
+  opacity: 0.05;
+}
+
+.card h3 {
+  color: var(--accent-primary);
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--space-md);
+}
+
+.card a {
+  color: var(--accent-primary);
+}
+
+.card p {
+  color: var(--museum-off-white);
+  flex-grow: 1;
+  margin-bottom: var(--space-md);
+}
+
+/* Submission Cards - Gallery Items */
+.submission-card {
+  background: var(--museum-dark-secondary);
+  border: 2px solid var(--museum-grey-dark);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.submission-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 12px 32px rgba(0, 217, 255, 0.2), var(--shadow-lg);
+}
+
+.submission-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid var(--museum-grey-dark);
+  transition: transform var(--transition-base), filter var(--transition-base);
+}
+
+.submission-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+  border-bottom-color: var(--accent-primary);
+}
+
+.submission-card-body {
+  padding: var(--space-lg);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.submission-card h4 {
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.submission-card .meta {
+  font-size: 0.9rem;
+  color: var(--museum-grey-light);
+  margin-bottom: var(--space-md);
+}
+
+.submission-card-body > a {
+  color: var(--accent-primary);
+  font-weight: 600;
+  margin-top: auto;
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+.btn-primary,
+.btn-secondary,
+button {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: 0.875rem;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--museum-black);
+  border: 2px solid var(--accent-primary);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  transition: all var(--transition-base);
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-primary);
+  color: var(--museum-black);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   FORMS
+   ============================================================================ */
+
+input,
+textarea,
+select {
+  font-family: var(--font-family-body);
+  background-color: var(--museum-dark-secondary);
+  color: var(--museum-white);
+  border: 2px solid var(--museum-grey-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 1rem;
+  transition: all var(--transition-base);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--museum-grey-light);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  color: var(--museum-off-white);
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+footer {
+  background-color: var(--museum-dark-secondary);
+  border-top: 2px solid var(--museum-grey-dark);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  color: var(--museum-grey-light);
+  margin-top: var(--space-3xl);
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+footer a {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.loading,
+.error {
+  text-align: center;
+  padding: var(--space-2xl);
+  font-size: 1.125rem;
+}
+
+.error {
+  color: var(--error);
+}
+
+.loading {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Visually Hidden - For Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .card {
+    padding: var(--space-lg);
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  button {
+    padding: var(--space-md) var(--space-lg);
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header nav {
+    flex-direction: column;
+    padding: var(--space-md);
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cta-buttons {
+    flex-direction: column !important;
+  }
+
+  .cta-buttons a {
+    width: 100%;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  header,
+  footer,
+  .nav-links {
+    display: none;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
+}
+
+/* ============================================================================
+   HIGH CONTRAST MODE SUPPORT
+   ============================================================================ */
+
+@media (prefers-contrast: more) {
+  .card {
+    border-width: 3px;
+  }
+
+  .nav-links a {
+    border-width: 2px;
+  }
+
+  button {
+    border-width: 2px;
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION SUPPORT
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+   CUSTOM COMPONENT STYLES
+   ============================================================================ */
+
+/* Design Movements Section */
+.design-movements {
+  background-color: transparent;
+}
+
+/* Community Section */
+.community-section {
+  padding: var(--space-2xl) var(--space-lg);
+  background: linear-gradient(135deg, var(--museum-dark-secondary) 0%, var(--museum-grey-dark) 100%);
+  border-top: 2px solid var(--accent-primary);
+}
+
+/* Explore Links in Cards */
+.explore-link {
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-base);
+}
+
+.explore-link:hover {
+  color: var(--accent-secondary);
+  transform: translateX(4px);
+}
+

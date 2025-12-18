@@ -6,7 +6,6 @@ module.exports = function (eleventyConfig) {
 
   // Path prefix for GitHub Pages
   const pathPrefix = process.env.ELEVENTY_ENV === 'production' ? '/IS373_final' : '';
-  eleventyConfig.setPathPrefix(pathPrefix);
 
   // Global site data (used in templates)
   if (eleventyConfig.addGlobalData) {
@@ -96,6 +95,6 @@ module.exports = function (eleventyConfig) {
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
     dataTemplateEngine: "njk",
-    pathPrefix: process.env.PATH_PREFIX || ""
+    pathPrefix: process.env.ELEVENTY_ENV === 'production' ? '/IS373_final' : ''
   };
 };
