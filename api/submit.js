@@ -110,6 +110,33 @@ module.exports = async function (req, res) {
       }
     }
 
+    // Send to Airtable CRM
+    if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
+      try {
+        const tableName = process.env.AIRTABLE_TABLE_NAME || 'Submissions'
+        await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${tableName}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fields: {
+              Name: name,
+              Email: email,
+              Style: style,
+              URL: url,
+              Status: 'submitted',
+              Timestamp: new Date().toISOString()
+            }
+          })
+        })
+      } catch (airtableErr) {
+        // Don't fail the submission if Airtable fails
+        console.error('Airtable CRM error:', airtableErr)
+      }
+    }
+
     res.setHeader('Content-Type', 'application/json')
     return res.end(JSON.stringify({ success: true }))
   } catch (err) {
