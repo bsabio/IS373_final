@@ -100,7 +100,10 @@ description: Share your design with our community gallery
 
 <script>
 // API_ROOT can be set globally (e.g. window.API_ROOT) if API server runs on a different port.
-const API_ROOT = (typeof window.API_ROOT !== 'undefined') ? window.API_ROOT : ''
+// In production (Vercel), use relative paths. In dev, use localhost:8888
+const API_ROOT = (typeof window.API_ROOT !== 'undefined') 
+  ? window.API_ROOT 
+  : (window.location.hostname === 'localhost' ? 'http://localhost:8888' : '')
 
 const form = document.getElementById('submissionForm')
 const messageEl = document.getElementById('formMessage')

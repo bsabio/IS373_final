@@ -1,3 +1,4 @@
+require('dotenv').config();
 const htmlMinifier = require("html-minifier-terser");
 
 module.exports = function (eleventyConfig) {
