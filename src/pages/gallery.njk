@@ -166,7 +166,7 @@ async function loadSubmissions() {
     
     container.innerHTML = items.map(item => `
       <article class="submission-card">
-        ${item.screenshot?.asset?.url ? `<img src="${item.screenshot.asset.url}" alt="Screenshot by ${escapeHtml(item.name)}" />` : ''}
+        ${item.screenshot?.asset?.url ? `<img src="${item.screenshot.asset.url}" alt="Screenshot by ${escapeHtml(item.name)}" loading="lazy" />` : ''}
         <div class="submission-card-body">
           <h4>${escapeHtml(item.name)}</h4>
           <p class="meta">Style: ${item.style?.title ? escapeHtml(item.style.title) : 'Unknown'}</p>

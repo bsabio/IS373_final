@@ -8,10 +8,55 @@ module.exports = function (eleventyConfig) {
   if (eleventyConfig.addGlobalData) {
     eleventyConfig.addGlobalData("site", {
       title: "MyWebClass.org",
-      description: "A learning site for Web Class",
+      description: "A learning site for Web Class about design principles and movements",
+      url: process.env.SITE_URL || "https://mywebclass.org",
       baseUrl: process.env.BASEURL || "."
     });
   }
+
+  // Date filters
+  eleventyConfig.addFilter("readableDate", function (date) {
+    if (!date) return "Date not available";
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return "Invalid date";
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  });
+
+  eleventyConfig.addFilter("dateToISO", function (date) {
+    if (!date) return new Date().toISOString();
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return new Date().toISOString();
+    return d.toISOString();
+  });
+
+  // Utility filters
+  eleventyConfig.addFilter("excerpt", function (content) {
+    if (!content) return "";
+    const excerpt = content.replace(/(<([^>]+)>)/gi, "").substring(0, 200);
+    return excerpt + (excerpt.length >= 200 ? "..." : "");
+  });
+
+  eleventyConfig.addFilter("limit", function (array, limit) {
+    if (!Array.isArray(array)) return [];
+    return array.slice(0, limit);
+  });
+
+  eleventyConfig.addFilter("currentYear", function () {
+    return new Date().getFullYear();
+  });
+
+  // Collections for blog posts and gallery submissions
+  eleventyConfig.addCollection("blog", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("src/blog/*.md").reverse();
+  });
+
+  eleventyConfig.addCollection("recentPosts", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("src/blog/*.md").reverse().slice(0, 5);
+  });
 
   // Minify HTML in production
   if (process.env.ELEVENTY_ENV === "production") {

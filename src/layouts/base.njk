@@ -5,26 +5,68 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{% if title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ description or site.description }}" />
+    
+    <!-- DNS Prefetch and Preconnect for Performance -->
+    <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="{{ site.baseUrl }}/assets/css/global.css" as="style" />
     <link rel="stylesheet" href="{{ site.baseUrl }}/assets/css/global.css" />
 
-    <!-- Basic Open Graph -->
-    <meta property="og:title" content="{{ title or site.title }}" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}" />
     <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}" />
+    <meta name="twitter:description" content="{{ description or site.description }}" />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="{{ site.baseUrl }}/">Home</a> |
-        <a href="{{ site.baseUrl }}/gallery/">Gallery</a>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <span aria-hidden="true">|</span>
+        <a href="/gallery/">Gallery</a>
       </nav>
     </header>
 
-    <main>
+    <main id="main-content" role="main">
       {{ content | safe }}
     </main>
 
-    <footer>
-      <p>&copy; {{ site.title }}</p>
+    <footer role="contentinfo">
+      <p>&copy; <span id="current-year"></span> {{ site.title }} | <a href="/pages/privacy/">Privacy Policy</a> | <a href="#" onclick="window.openCookiePreferences(); return false;">Cookie Preferences</a></p>
+      
+      <!-- Schema.org Organization Structured Data -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "url": "{{ site.url }}",
+        "description": "{{ site.description }}",
+        "logo": "{{ site.url }}/assets/logo.png"
+      }
+      </script>
     </footer>
+    
+    <!-- Cookie Consent Banner -->
+    {% include "../includes/cookie-consent.njk" %}
+    
+    <!-- Set current year -->
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>

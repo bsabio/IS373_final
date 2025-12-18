@@ -243,7 +243,7 @@ async function loadStyleDetail() {
           <h2>Visual Examples</h2>
           <div class="sample-gallery">
             ${style.sampleImages.map((img, idx) => `
-              <img src="${img.asset?.url || ''}" alt="Sample ${idx + 1}" />
+              <img src="${img.asset?.url || ''}" alt="Sample ${idx + 1}" loading="lazy" />
             `).join('')}
           </div>
         </section>
@@ -261,7 +261,7 @@ async function loadStyleDetail() {
       submissions.forEach(item => {
         html += `
           <article class="submission-card">
-            ${item.screenshot?.asset?.url ? `<img src="${item.screenshot.asset.url}" alt="Submission by ${escapeHtml(item.name)}" />` : ''}
+            ${item.screenshot?.asset?.url ? `<img src="${item.screenshot.asset.url}" alt="Submission by ${escapeHtml(item.name)}" loading="lazy" />` : ''}
             <div class="submission-card-body">
               <h4>${escapeHtml(item.name)}</h4>
               <p>${item.description ? escapeHtml(item.description) : ''}</p>
