@@ -9,10 +9,11 @@ module.exports = function (eleventyConfig) {
 
   // Global site data (used in templates)
   if (eleventyConfig.addGlobalData) {
+    const baseUrl = process.env.SITE_URL || "https://bsabio.github.io";
     eleventyConfig.addGlobalData("site", {
       title: "MyWebClass.org",
       description: "A learning site for Web Class about design principles and movements",
-      url: process.env.SITE_URL || "https://bsabio.github.io",
+      url: baseUrl + pathPrefix,
       baseUrl: pathPrefix
     });
   }
