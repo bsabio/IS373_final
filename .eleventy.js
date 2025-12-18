@@ -16,7 +16,7 @@ module.exports = function (eleventyConfig) {
       baseUrl: pathPrefix
     });
   }
-
+ 
   // Date filters
   eleventyConfig.addFilter("readableDate", function (date) {
     if (!date) return "Date not available";

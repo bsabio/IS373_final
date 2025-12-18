@@ -94,6 +94,22 @@ module.exports = async function (req, res) {
       return res.end(JSON.stringify({ error: 'Failed to create submission' }))
     }
 
+    // Send Discord webhook notification
+    if (process.env.DISCORD_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.DISCORD_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `🖼️ New submission: **${name}** (${style})\n${url}`
+          })
+        })
+      } catch (webhookErr) {
+        // Don't fail the submission if webhook fails
+        console.error('Discord webhook error:', webhookErr)
+      }
+    }
+
     res.setHeader('Content-Type', 'application/json')
     return res.end(JSON.stringify({ success: true }))
   } catch (err) {
