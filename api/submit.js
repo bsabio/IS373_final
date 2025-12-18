@@ -76,7 +76,7 @@ module.exports = async function (req, res) {
       _type: 'gallerySubmission',
       name,
       email,
-      style: { _type: 'reference', _ref: style },
+      style,  // Just use the style string directly, not as reference
       url,
       description,
       screenshot: {
@@ -87,11 +87,12 @@ module.exports = async function (req, res) {
     }
 
     try {
-      await client.create(doc)
+      const result = await client.create(doc)
+      console.log('✅ Submission created:', result._id)
     } catch (err) {
-      console.error('Sanity create document error:', err)
+      console.error('❌ Sanity create document error:', err.message, err)
       res.statusCode = 500
-      return res.end(JSON.stringify({ error: 'Failed to create submission' }))
+      return res.end(JSON.stringify({ error: 'Failed to create submission: ' + err.message }))
     }
 
     // Send Discord webhook notification
