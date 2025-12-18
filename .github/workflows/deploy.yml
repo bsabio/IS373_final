@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: false
         
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,9 +37,9 @@ jobs:
         run: npm run build
         env:
           ELEVENTY_ENV: production
-          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
-          SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID || 'placeholder' }}
+          SANITY_DATASET: ${{ secrets.SANITY_DATASET || 'production' }}
+          SANITY_TOKEN: ${{ secrets.SANITY_TOKEN || '' }}
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
