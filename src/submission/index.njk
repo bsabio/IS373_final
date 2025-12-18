@@ -119,8 +119,17 @@ async function loadStyles(){
       styleSelect.appendChild(opt)
     })
   }catch(err){
-    styleSelect.innerHTML = '<option value="">Unable to load styles</option>'
-    console.error(err)
+    // Fallback to static options if API is unavailable
+    console.log('Using fallback styles')
+    styleSelect.innerHTML = `
+      <option value="">Select a style</option>
+      <option value="bauhaus">Bauhaus</option>
+      <option value="minimalism">Minimalism</option>
+      <option value="neo-futurism">Neo-Futurism</option>
+      <option value="swiss-design">Swiss Design</option>
+      <option value="brutalism">Brutalism</option>
+      <option value="art-deco">Art Deco</option>
+    `
   }
 }
 
